@@ -1,3 +1,7 @@
+package UI;
+
+import event.RegEvent;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,6 +22,8 @@ public class LoginStart extends JFrame {
     JPanel button_panel;
     FlowLayout flowLayout; // set layout
     JPanel main_panel;
+
+    RegEvent regEvent;
 
     final int WIDTH = 600;
     final int HEIGHT = 400;
@@ -123,6 +129,11 @@ public class LoginStart extends JFrame {
 
         this.add(main_panel);
 
+        allEvent();
+    }
 
+    void allEvent(){
+        regEvent = new RegEvent();
+        register_button.addMouseListener(regEvent);
     }
 }
