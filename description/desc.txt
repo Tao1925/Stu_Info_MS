@@ -1,0 +1,8 @@
+1.  admin -> CURD (Create Update Retrieve Delete)
+2.  user -> only search
+3.  sign up -> for user
+    User Name:
+    Email:
+    Verification code:
+    Password:
+    Repeat password:
