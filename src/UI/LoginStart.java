@@ -1,6 +1,7 @@
 package UI;
 
 import event.RegEvent;
+import style.MyFonts;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,11 +59,10 @@ public class LoginStart extends JFrame {
 
 
         // set title
-        Font title_font = new Font("Microsoft YaHei",Font.BOLD,30);
         title_panel = new JPanel();
         flowLayout = new FlowLayout(FlowLayout.CENTER);
         title_label = new JLabel("Student Info MS");
-        title_label.setFont(title_font);
+        title_label.setFont(MyFonts.title_font);
         title_label.setForeground(Color.WHITE);
         title_panel.setBounds(0,20,WIDTH,100);
         title_panel.setLayout(flowLayout);
@@ -72,13 +72,12 @@ public class LoginStart extends JFrame {
 
 
         // set ID panel
-        Font id_font = new Font("Microsoft YaHei",Font.PLAIN,18);
         id_panel = new JPanel();
         id_label = new JLabel("            ID: ");
-        id_label.setFont(id_font);
+        id_label.setFont(MyFonts.plain_font);
         id_label.setForeground(Color.WHITE);
         id_textField = new JTextField(15);
-        id_textField.setFont(id_font);
+        id_textField.setFont(MyFonts.plain_font);
         id_panel.setBounds(0,100,WIDTH,50);
         id_panel.setLayout(flowLayout);
         id_panel.setOpaque(false);
@@ -89,10 +88,10 @@ public class LoginStart extends JFrame {
         // set password panel
         password_panel = new JPanel();
         password_label = new JLabel("password: ");
-        password_label.setFont(id_font);
+        password_label.setFont(MyFonts.plain_font);
         password_label.setForeground(Color.WHITE);
         password_field = new JPasswordField(15);
-        password_field.setFont(id_font);
+        password_field.setFont(MyFonts.plain_font);
         password_panel.setBounds(0,150,WIDTH,50);
         password_panel.setLayout(flowLayout);
         password_panel.setOpaque(false);
@@ -101,14 +100,13 @@ public class LoginStart extends JFrame {
         main_panel.add(password_panel);
 
         // set button panel
-        Font button_font = new Font("Verdana",Font.BOLD,16);
         button_panel = new JPanel();
         login_button = new JButton("login");
         register_button = new JButton("register");
         login_button.setPreferredSize(new Dimension(110,30));
-        login_button.setFont(button_font);
+        login_button.setFont(MyFonts.button_font);
         register_button.setPreferredSize(new Dimension(110,30));
-        register_button.setFont(button_font);
+        register_button.setFont(MyFonts.button_font);
         button_panel.setLayout(flowLayout);
         button_panel.setBounds(0,200,WIDTH,50);
         button_panel.add(login_button);
@@ -128,6 +126,7 @@ public class LoginStart extends JFrame {
 
 
         this.add(main_panel);
+        this.setTitle("Login");
 
         allEvent();
     }
