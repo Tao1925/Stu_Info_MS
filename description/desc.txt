@@ -6,3 +6,6 @@
     Verification code:
     Password:
     Repeat password:
+4.  the authority value of table User in SIMS_DB
+    0 -> admin
+    1 -> common user

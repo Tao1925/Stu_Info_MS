@@ -25,7 +25,7 @@ public class Register extends JFrame{
     JPasswordField password_field;
     JPasswordField check_field;
     FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
-    ImageIcon accept_img = new ImageIcon("src/img/accept_1.png");
+    ImageIcon accept_img  = new ImageIcon("src/img/accept_1.png");
     ImageIcon deny_img = new ImageIcon("src/img/deny_1.png");
     JLabel password_status;
     JPanel main_panel;
