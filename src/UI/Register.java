@@ -1,5 +1,6 @@
 package UI;
 
+import event.RegEvent;
 import style.MyFonts;
 
 import javax.swing.*;
@@ -19,15 +20,16 @@ public class Register extends JFrame{
     JPanel check_panel;
     JPanel button_panel;
     JButton register_button;
-    JTextField id_textField;
-    JTextField email_textField;
-    JTextField verify_textField;
-    JPasswordField password_field;
-    JPasswordField check_field;
+    public static JTextField id_textField;
+    public static JTextField email_textField;
+    public static JTextField verify_textField;
+    public static JPasswordField password_field;
+    public static JPasswordField check_field;
     FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
     ImageIcon accept_img  = new ImageIcon("src/img/accept_1.png");
     ImageIcon deny_img = new ImageIcon("src/img/deny_1.png");
     JLabel password_status;
+    RegEvent regEvent;
     JPanel main_panel;
 
 
@@ -142,5 +144,17 @@ public class Register extends JFrame{
         // this.setLayout(null);
         this.add(main_panel);
         this.setTitle("Register");
+
+        setTags();
+        allEvent();
+    }
+
+    void setTags(){
+        register_button.setName("register_button");
+    }
+
+    void allEvent(){
+        regEvent = new RegEvent();
+        register_button.addActionListener(regEvent);
     }
 }

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Mysqld {
 
-    Connection con = null;
+    public static Connection con = null;
 
     public Mysqld(String account,String password){
         try {
@@ -23,6 +23,10 @@ public class Mysqld {
         }catch (SQLException e){
             System.out.println("connect DB failed");
         }
+
+    }
+
+    public static void writeRegister(String id,String email,String password,String authority){
 
     }
 

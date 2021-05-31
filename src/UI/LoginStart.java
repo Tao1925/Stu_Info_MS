@@ -1,6 +1,6 @@
 package UI;
 
-import event.RegEvent;
+import event.LoginEvent;
 import style.MyFonts;
 
 import javax.swing.*;
@@ -24,7 +24,7 @@ public class LoginStart extends JFrame {
     FlowLayout flowLayout; // set layout
     JPanel main_panel;
 
-    RegEvent regEvent;
+    LoginEvent loginEvent;
 
     final int WIDTH = 600;
     final int HEIGHT = 400;
@@ -132,7 +132,7 @@ public class LoginStart extends JFrame {
     }
 
     void allEvent(){
-        regEvent = new RegEvent();
-        register_button.addMouseListener(regEvent);
+        loginEvent = new LoginEvent();
+        register_button.addMouseListener(loginEvent);
     }
 }
