@@ -1,31 +1,36 @@
 package event;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import UI.LoginStart;
+import UI.Manage;
+import UI.Register;
+import mysqld.Mysqld;
 
-public class LoginEvent implements MouseListener {
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("Clicked");
-    }
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        System.out.println("Pressed");
-    }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println("Released");
-    }
+public class LoginEvent implements ActionListener{
+
+    JButton button;
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-        System.out.println("Entered");
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        System.out.println("Exited");
+    public void actionPerformed(ActionEvent e) {
+        try{
+            button = (JButton) e.getSource();
+            if (button.getName().equals("login_button")){
+                String id = LoginStart.id_textField.getText();
+                String password = new String(LoginStart.password_field.getPassword());
+                if (Mysqld.loginAccount(id, password)){
+                    Manage manage = new Manage();
+                }else{
+                    JOptionPane.showMessageDialog(null,"wrong ID or password","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+            }else if (button.getName().equals("register_button")){
+                Register register = new Register();
+            }
+        }catch (Exception exp){
+            exp.printStackTrace();
+        }
     }
 }

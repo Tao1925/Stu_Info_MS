@@ -1,12 +1,12 @@
 package mysqld;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Mysqld {
 
     public static Connection con = null;
+
+
 
     public Mysqld(String account,String password){
         try {
@@ -30,4 +30,23 @@ public class Mysqld {
 
     }
 
+    public static boolean loginAccount(String id,String password){
+        Statement sql;
+        ResultSet resultSet;
+        String url = "select id,password from user";
+        try{
+            sql = con.createStatement();
+            resultSet = sql.executeQuery(url);
+            while(resultSet.next()){
+                if (resultSet.getString(1).equals(id)
+                && resultSet.getString(2).equals(password)){
+                    return true;
+                }
+            }
+            return false;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

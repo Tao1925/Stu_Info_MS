@@ -14,10 +14,10 @@ public class LoginStart extends JFrame {
     JLabel title_label;
     JLabel id_label;
     JPanel id_panel;
-    JTextField id_textField;
+    public static JTextField id_textField;
     JLabel password_label;
     JPanel password_panel;
-    JPasswordField password_field;
+    public static JPasswordField password_field;
     JButton login_button;
     JButton register_button;
     JPanel button_panel;
@@ -132,7 +132,10 @@ public class LoginStart extends JFrame {
     }
 
     void allEvent(){
+        login_button.setName("login_button");
+        register_button.setName("register_button");
         loginEvent = new LoginEvent();
-        register_button.addMouseListener(loginEvent);
+        login_button.addActionListener(loginEvent);
+        register_button.addActionListener(loginEvent);
     }
 }

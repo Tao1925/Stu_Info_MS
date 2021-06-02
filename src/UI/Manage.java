@@ -34,6 +34,8 @@ public class Manage extends JFrame {
     JButton reset_button;
     JPanel form_panel;
     JPanel main_panel;
+    JTextArea result_textArea;
+    JPanel result_panel;
     FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
 
     final int WIDTH = 850;
@@ -151,6 +153,12 @@ public class Manage extends JFrame {
         // form_panel.add(my_table);
         form_panel.add(scrollPane);
         main_panel.add(form_panel);
+
+        // set result TextArea
+        result_textArea = new JTextArea();
+        result_textArea.setBounds(0,410,WIDTH,150);
+        result_textArea.setBorder(BorderFactory.createTitledBorder("account info"));
+        main_panel.add(result_textArea);
 
         this.setJMenuBar(menuBar);
         this.add(main_panel);

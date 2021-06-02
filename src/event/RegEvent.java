@@ -48,13 +48,14 @@ public class RegEvent implements ActionListener {
         }else {
             Connection con = Mysqld.con;
             PreparedStatement preSql;
-            String sql = "insert into user values(?,?,?,?)";
+            String sql = "insert into user values(?,?,?,?,?)";
             try {
                 preSql = con.prepareStatement(sql);
                 preSql.setString(1,id);
                 preSql.setString(2,email);
                 preSql.setString(3,password);
                 preSql.setString(4,"1");
+                preSql.setString(5,"0");
                 preSql.executeUpdate();
                 // Statement sql = con.createStatement();
                 JOptionPane.showMessageDialog(null,"Registered successfully","Note",JOptionPane.PLAIN_MESSAGE);
