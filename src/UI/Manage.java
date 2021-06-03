@@ -1,5 +1,6 @@
 package UI;
 
+import event.AccountEvent;
 import style.MyFonts;
 
 import javax.swing.*;
@@ -7,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class Manage extends JFrame {
@@ -14,8 +17,8 @@ public class Manage extends JFrame {
 
 
     JMenuBar menuBar;
-    JMenu menu;
-    JMenuItem item;
+    JMenu menu1;
+    JMenuItem menuItem1_1,menuItem1_2,menuItem1_3,menuItem1_4;
     JPanel info_panel;
     JLabel name_label;
     JTextField name_textField;
@@ -34,8 +37,8 @@ public class Manage extends JFrame {
     JButton reset_button;
     JPanel form_panel;
     JPanel main_panel;
-    JTextArea result_textArea;
-    JPanel result_panel;
+    public static JTextArea result_textArea;
+    ActionListener menu1_listener;
     FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
 
     final int WIDTH = 850;
@@ -78,10 +81,16 @@ public class Manage extends JFrame {
 
         // set menu bar
         menuBar = new JMenuBar();
-        menu = new JMenu("Help");
-        item = new JMenuItem("Setting");
-        menu.add(item);
-        menuBar.add(menu);
+        menu1 = new JMenu("Manage");
+        menuItem1_1 = new JMenuItem("Show online account");
+        menuItem1_2 = new JMenuItem("Show all account");
+        menuItem1_3 = new JMenuItem("Change employee info");
+        menuItem1_4 = new JMenuItem("Change current info");
+        menu1.add(menuItem1_1);
+        menu1.add(menuItem1_2);
+        menu1.add(menuItem1_3);
+        menu1.add(menuItem1_4);
+        menuBar.add(menu1);
 
         // set info panel
         info_panel = new JPanel();
@@ -158,10 +167,14 @@ public class Manage extends JFrame {
         result_textArea = new JTextArea();
         result_textArea.setBounds(0,410,WIDTH,150);
         result_textArea.setBorder(BorderFactory.createTitledBorder("account info"));
+        result_textArea.setEditable(false);
         main_panel.add(result_textArea);
 
         this.setJMenuBar(menuBar);
         this.add(main_panel);
+
+        setAllName();
+        allEvent();
     }
 
     void table(){
@@ -195,5 +208,20 @@ public class Manage extends JFrame {
             rwo = new Vector(5);
         }
         return my_table;
+    }
+
+    void setAllName(){
+        menuItem1_1.setName("item1_1");
+        menuItem1_2.setName("item1_2");
+        menuItem1_3.setName("item1_3");
+        menuItem1_4.setName("item1_4");
+    }
+
+    void allEvent(){
+        menu1_listener = new AccountEvent();
+        menuItem1_1.addActionListener(menu1_listener);
+        menuItem1_2.addActionListener(menu1_listener);
+        menuItem1_3.addActionListener(menu1_listener);
+        menuItem1_4.addActionListener(menu1_listener);
     }
 }

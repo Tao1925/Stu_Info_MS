@@ -1,5 +1,7 @@
 package mysqld;
 
+import UI.Manage;
+
 import java.sql.*;
 
 public class Mysqld {
@@ -48,5 +50,28 @@ public class Mysqld {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void onlineAccount(){
+        Statement sql;
+        ResultSet resultSet;
+        String url = "select * from user";
+        try{
+            sql = con.createStatement();
+            resultSet = sql.executeQuery(url);
+            Manage.result_textArea.setText("ID\temail\n");
+            while(resultSet.next()){
+                String ID = resultSet.getString(1);
+                String email = resultSet.getString(2);
+                String status = resultSet.getString(5);
+                if (status.equals("0")){
+                    String pre = Manage.result_textArea.getText();
+                    pre += ID + "\t" + email + "\n";
+                    Manage.result_textArea.setText(pre);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }
