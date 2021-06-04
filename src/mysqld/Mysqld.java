@@ -1,7 +1,9 @@
 package mysqld;
 
+import UI.ChangeAccount;
 import UI.Manage;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class Mysqld {
@@ -59,19 +61,79 @@ public class Mysqld {
         try{
             sql = con.createStatement();
             resultSet = sql.executeQuery(url);
-            Manage.result_textArea.setText("ID\temail\n");
+            Manage.result_textArea.setText("ID\temail\t\tstatus\n");
             while(resultSet.next()){
                 String ID = resultSet.getString(1);
                 String email = resultSet.getString(2);
                 String status = resultSet.getString(5);
                 if (status.equals("0")){
                     String pre = Manage.result_textArea.getText();
-                    pre += ID + "\t" + email + "\n";
+                    pre += ID + "\t" + email + "\t\t" + "online" + "\n";
                     Manage.result_textArea.setText(pre);
                 }
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }
+    }
+
+    public static void allAccount() {
+        Statement sql;
+        ResultSet resultSet;
+        String url = "select * from user";
+        try {
+            sql = con.createStatement();
+            resultSet = sql.executeQuery(url);
+            Manage.result_textArea.setText("ID\temail\t\tstatus\n");
+            while (resultSet.next()) {
+                String ID = resultSet.getString(1);
+                String email = resultSet.getString(2);
+                String status = resultSet.getString(5);
+                if (status.equals("0")) {
+                    String pre = Manage.result_textArea.getText();
+                    pre += ID + "\t" + email + "\t\t" + "online" + "\n";
+                    Manage.result_textArea.setText(pre);
+                } else if (status.equals("1")) {
+                    String pre = Manage.result_textArea.getText();
+                    pre += ID + "\t" + email + "\t\t" + "offline" + "\n";
+                    Manage.result_textArea.setText(pre);
+                }
+                // System.out.println(Manage.result_textArea.getText());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void changeAccInfoEvent(){
+        Statement sql;
+        PreparedStatement preSql;
+        ResultSet resultSet;
+        String id = ChangeAccount.id_textField.getText();
+        String email = ChangeAccount.email_textField.getText();
+        String password = new String(ChangeAccount.password_field.getPassword());
+        String check = new String(ChangeAccount.check_field.getPassword());
+        if (id.equals("")){
+            JOptionPane.showMessageDialog(null,"ID can't be null","Warning",JOptionPane.WARNING_MESSAGE);
+        }else if (email.equals("")){
+            JOptionPane.showMessageDialog(null,"Email can't be null","Warning",JOptionPane.WARNING_MESSAGE);
+        }else if (password.equals("")){
+            JOptionPane.showMessageDialog(null,"Password can't be null","Warning",JOptionPane.WARNING_MESSAGE);
+        }else if (!check.equals(password)){
+            JOptionPane.showMessageDialog(null,"Password check failed","Warning",JOptionPane.WARNING_MESSAGE);
+        }else{
+            String url = "update user set id=?,password=? where email=?";
+            try{
+                preSql = con.prepareStatement(url);
+                preSql.setString(1,id);
+                preSql.setString(2,password);
+                preSql.setString(3,email);
+                preSql.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Change successfully","Note",JOptionPane.PLAIN_MESSAGE);
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(null,"No such account","Warning",JOptionPane.WARNING_MESSAGE);
+                e.printStackTrace();
+            }
         }
     }
 }

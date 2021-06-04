@@ -14,7 +14,11 @@ public class AccountEvent implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             menuItem = (JMenuItem) e.getSource();
-            Mysqld.onlineAccount();
+            if (menuItem.getName().equals("item1_1")){
+                Mysqld.onlineAccount();
+            }else if (menuItem.getName().equals("item1_2")){
+                Mysqld.allAccount();
+            }
         }catch (Exception exp){
             exp.printStackTrace();
         }
