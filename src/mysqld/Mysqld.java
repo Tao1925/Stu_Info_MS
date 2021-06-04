@@ -10,7 +10,7 @@ public class Mysqld {
 
     public static Connection con = null;
 
-
+    public static String login_id;
 
     public Mysqld(String account,String password){
         try {
@@ -44,6 +44,8 @@ public class Mysqld {
             while(resultSet.next()){
                 if (resultSet.getString(1).equals(id)
                 && resultSet.getString(2).equals(password)){
+                    login_id = id;
+                    setStatus(id,"1");
                     return true;
                 }
             }
@@ -135,5 +137,20 @@ public class Mysqld {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void setStatus(String id,String status){
+        PreparedStatement preSql;
+        String sql = "update user set status=? where id=?";
+        try{
+            preSql = con.prepareStatement(sql);
+            preSql.setString(1,id);
+            preSql.setString(2,status);
+            preSql.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
     }
 }

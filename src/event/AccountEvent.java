@@ -1,5 +1,7 @@
 package event;
 
+import UI.ChangeAccount;
+import main.Main;
 import mysqld.Mysqld;
 
 import javax.swing.*;
@@ -18,6 +20,15 @@ public class AccountEvent implements ActionListener {
                 Mysqld.onlineAccount();
             }else if (menuItem.getName().equals("item1_2")){
                 Mysqld.allAccount();
+            }else if (menuItem.getName().equals("item1_3")){
+                ChangeAccount changeAccount = new ChangeAccount();
+            }else if (menuItem.getName().equals("item2_1")){
+                Mysqld.setStatus(Mysqld.login_id,"0");
+                LoginEvent.manage.dispose();
+                Main.loginStart.show();
+            }else if (menuItem.getName().equals("item2_2")){
+                Mysqld.setStatus(Mysqld.login_id,"0");
+                LoginEvent.manage.dispose();
             }
         }catch (Exception exp){
             exp.printStackTrace();

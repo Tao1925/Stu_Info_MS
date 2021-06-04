@@ -17,8 +17,9 @@ public class Manage extends JFrame {
 
 
     JMenuBar menuBar;
-    JMenu menu1;
-    JMenuItem menuItem1_1,menuItem1_2,menuItem1_3,menuItem1_4;
+    JMenu menu1,menu2;
+    JMenuItem menuItem1_1,menuItem1_2,menuItem1_3;
+    JMenuItem menuItem2_1,menuItem2_2;
     JPanel info_panel;
     JLabel name_label;
     JTextField name_textField;
@@ -38,7 +39,7 @@ public class Manage extends JFrame {
     JPanel form_panel;
     JPanel main_panel;
     public static JTextArea result_textArea;
-    ActionListener menu1_listener;
+    ActionListener menu1_listener,menu2_listener;
     FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
 
     final int WIDTH = 850;
@@ -84,13 +85,17 @@ public class Manage extends JFrame {
         menu1 = new JMenu("Manage");
         menuItem1_1 = new JMenuItem("Show online account");
         menuItem1_2 = new JMenuItem("Show all account");
-        menuItem1_3 = new JMenuItem("Change employee info");
-        menuItem1_4 = new JMenuItem("Change current info");
+        menuItem1_3 = new JMenuItem("Change account info");
+        menu2 = new JMenu("Setting");
+        menuItem2_1 = new JMenuItem("Log out");
+        menuItem2_2 = new JMenuItem("Exit");
         menu1.add(menuItem1_1);
         menu1.add(menuItem1_2);
         menu1.add(menuItem1_3);
-        menu1.add(menuItem1_4);
         menuBar.add(menu1);
+        menu2.add(menuItem2_1);
+        menu2.add(menuItem2_2);
+        menuBar.add(menu2);
 
         // set info panel
         info_panel = new JPanel();
@@ -214,7 +219,8 @@ public class Manage extends JFrame {
         menuItem1_1.setName("item1_1");
         menuItem1_2.setName("item1_2");
         menuItem1_3.setName("item1_3");
-        menuItem1_4.setName("item1_4");
+        menuItem2_1.setName("item2_1");
+        menuItem2_2.setName("item2_2");
     }
 
     void allEvent(){
@@ -222,6 +228,8 @@ public class Manage extends JFrame {
         menuItem1_1.addActionListener(menu1_listener);
         menuItem1_2.addActionListener(menu1_listener);
         menuItem1_3.addActionListener(menu1_listener);
-        menuItem1_4.addActionListener(menu1_listener);
+        menu2_listener = new AccountEvent();
+        menuItem2_1.addActionListener(menu2_listener);
+        menuItem2_2.addActionListener(menu2_listener);
     }
 }
