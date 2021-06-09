@@ -12,9 +12,9 @@ public class Main {
 
     public static void main(String[] args) {
         Mysqld mysqld = new Mysqld("root","taosiyu20010620");
-        loginStart = new LoginStart();
+        // loginStart = new LoginStart();
         // register = new Register();
-        // Manage manage = new Manage();
+        Manage manage = new Manage();
         // ChangeAccount changeAccount = new ChangeAccount();
         // System.out.println("Hello world!");
     }

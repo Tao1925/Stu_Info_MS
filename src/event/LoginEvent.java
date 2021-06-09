@@ -9,6 +9,7 @@ import mysqld.Mysqld;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 
 public class LoginEvent implements ActionListener{
@@ -22,9 +23,13 @@ public class LoginEvent implements ActionListener{
             if (button.getName().equals("login_button")){
                 String id = LoginStart.id_textField.getText();
                 String password = new String(LoginStart.password_field.getPassword());
+                if (Objects.equals(Mysqld.findStatus(id), "1")) {
+                    JOptionPane.showMessageDialog(null, "Already log in", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 if (Mysqld.loginAccount(id, password)){
-                    Main.loginStart.dispose();
-                    manage = new Manage();
+                        Main.loginStart.dispose();
+                        manage = new Manage();
                 }else{
                     JOptionPane.showMessageDialog(null,"wrong ID or password","Warning",JOptionPane.WARNING_MESSAGE);
                 }

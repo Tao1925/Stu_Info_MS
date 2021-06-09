@@ -154,7 +154,78 @@ public class Mysqld {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
 
+    public static String findStatus(String id){
+        PreparedStatement preSql;
+        String sql = "select status from user where id=?";
+        try{
+            preSql=con.prepareStatement(sql);
+            preSql.setString(1,id);
+            ResultSet resultSet = preSql.executeQuery();
+            while(resultSet.next()){
+                return resultSet.getString(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    // cls for class
+    public static void addStu(String stu_id,String sex,String age,String cls,String name){
+        PreparedStatement preSql;
+        String sql = "insert into stu(stuid,sex,age,class,name) values (?,?,?,?,?)";
+        try{
+            preSql=con.prepareStatement(sql);
+            preSql.setString(1,stu_id);
+            preSql.setString(2,sex);
+            preSql.setString(3,age);
+            preSql.setString(4,cls);
+            preSql.setString(5,name);
+            preSql.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Add data successfully","Note",JOptionPane.PLAIN_MESSAGE);
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Stu ID already exists","Warning",JOptionPane.WARNING_MESSAGE);
+            e.printStackTrace();
+        }
+        showData();
+    }
 
+    public static void delStu(String stu_id){
+        PreparedStatement preSql;
+        String sql = "delete from stu where stuid=?";
+        try{
+            preSql=con.prepareStatement(sql);
+            preSql.setString(1,stu_id);
+            preSql.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Delete data successfully","Note",JOptionPane.PLAIN_MESSAGE);
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"No such stu ID ","Warning",JOptionPane.WARNING_MESSAGE);
+            e.printStackTrace();
+        }
+        showData();
+    }
+
+    public static void showData(){
+
+        int row_count =  Manage.model.getRowCount();;
+        while(row_count > 0){
+            Manage.model.removeRow(0);
+            row_count--;
+        }
+
+        String[] row = new String[5];
+        PreparedStatement preSql;
+        String sql = "select * from stu";
+        try{
+            preSql=con.prepareStatement(sql);
+            ResultSet resultSet = preSql.executeQuery();
+            while(resultSet.next()){
+                for(int i = 0; i < 5; i++) row[i] = resultSet.getString(i + 1);
+                Manage.model.addRow(row);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package UI;
 
 import event.AccountEvent;
+import event.CURDEvent;
 import event.WindowsEvent;
 import style.MyFonts;
 
@@ -23,20 +24,20 @@ public class Manage extends JFrame {
     JMenuItem menuItem2_1,menuItem2_2;
     JPanel info_panel;
     JLabel name_label;
-    JTextField name_textField;
+    public static JTextField name_textField;
     JLabel age_label;
-    JTextField age_textField;
+    public static JTextField age_textField;
     JLabel class_label;
-    JTextField class_textField;
+    public static JTextField class_textField;
     JLabel stuId_label;
-    JTextField stuId_textField;
+    public static JTextField stuId_textField;
     ButtonGroup sex_buttonGroup;
-    JRadioButton men_radioButton,women_radioButton;
+    public static JRadioButton men_radioButton,women_radioButton;
     JButton add_button;
     JButton delete_button;
     JButton change_button;
     JButton find_button;
-    JButton reset_button;
+    JButton show_button;
     JPanel form_panel;
     JPanel main_panel;
     public static JTextArea result_textArea;
@@ -47,10 +48,10 @@ public class Manage extends JFrame {
     final int WIDTH = 850;
     final int HEIGHT = 800;
     // form data
-    Object[] columns = {"Name","Sex","Age","Class","StuID"};
+    Object[] columns = {"StuID","Sex","Age","Class","Name"};
     static Object[][] a; //  title info
     static int row;
-    static DefaultTableModel model;
+    public static DefaultTableModel model;
     static TableColumnModel columnModel;
     JTable my_table = null;
     JScrollPane scrollPane;
@@ -105,12 +106,13 @@ public class Manage extends JFrame {
         info_panel.setBorder(BorderFactory.createTitledBorder("basic info manage"));
         info_panel.setBounds(0,0,WIDTH,100);
 
-        name_label = new JLabel("Name");
-        name_label.setFont(MyFonts.plain_font);
-        name_textField = new JTextField(6);
-        name_textField.setFont(MyFonts.plain_font);
-        info_panel.add(name_label);
-        info_panel.add(name_textField);
+        stuId_label = new JLabel("Student ID:");
+        stuId_label.setFont(MyFonts.plain_font);
+        stuId_textField = new JTextField(6);
+        stuId_textField.setFont(MyFonts.plain_font);
+        info_panel.add(stuId_label);
+        info_panel.add(stuId_textField);
+
 
         men_radioButton = new JRadioButton("Men");
         men_radioButton.setFont(MyFonts.plain_font);
@@ -136,12 +138,13 @@ public class Manage extends JFrame {
         info_panel.add(class_label);
         info_panel.add(class_textField);
 
-        stuId_label = new JLabel("Student ID:");
-        stuId_label.setFont(MyFonts.plain_font);
-        stuId_textField = new JTextField(6);
-        stuId_textField.setFont(MyFonts.plain_font);
-        info_panel.add(stuId_label);
-        info_panel.add(stuId_textField);
+
+        name_label = new JLabel("Name:");
+        name_label.setFont(MyFonts.plain_font);
+        name_textField = new JTextField(6);
+        name_textField.setFont(MyFonts.plain_font);
+        info_panel.add(name_label);
+        info_panel.add(name_textField);
 
         add_button = new JButton("Add");
         add_button.setFont(MyFonts.button_font);
@@ -155,9 +158,9 @@ public class Manage extends JFrame {
         find_button = new JButton("Find");
         find_button.setFont(MyFonts.button_font);
         info_panel.add(find_button);
-        reset_button = new JButton("Reset");
-        reset_button.setFont(MyFonts.button_font);
-        info_panel.add(reset_button);
+        show_button = new JButton("show");
+        show_button.setFont(MyFonts.button_font);
+        info_panel.add(show_button);
         main_panel.add(info_panel);
 
         // set form panel
@@ -223,6 +226,12 @@ public class Manage extends JFrame {
         menuItem1_3.setName("item1_3");
         menuItem2_1.setName("item2_1");
         menuItem2_2.setName("item2_2");
+
+        add_button.setName("add");
+        delete_button.setName("delete");
+        change_button.setName("change");
+        find_button.setName("find");
+        show_button.setName("show");
     }
 
     void allEvent(){
@@ -236,5 +245,12 @@ public class Manage extends JFrame {
 
         windows_listener = new WindowsEvent();
         this.addWindowListener(windows_listener);
+
+        CURDEvent curdEvent = new CURDEvent();
+        add_button.addActionListener(curdEvent);
+        delete_button.addActionListener(curdEvent);
+        change_button.addActionListener(curdEvent);
+        find_button.addActionListener(curdEvent);
+        show_button.addActionListener(curdEvent);
     }
 }
