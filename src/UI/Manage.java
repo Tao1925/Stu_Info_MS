@@ -1,6 +1,7 @@
 package UI;
 
 import event.AccountEvent;
+import event.WindowsEvent;
 import style.MyFonts;
 
 import javax.swing.*;
@@ -40,6 +41,7 @@ public class Manage extends JFrame {
     JPanel main_panel;
     public static JTextArea result_textArea;
     ActionListener menu1_listener,menu2_listener;
+    WindowsEvent windows_listener;
     FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
 
     final int WIDTH = 850;
@@ -231,5 +233,8 @@ public class Manage extends JFrame {
         menu2_listener = new AccountEvent();
         menuItem2_1.addActionListener(menu2_listener);
         menuItem2_2.addActionListener(menu2_listener);
+
+        windows_listener = new WindowsEvent();
+        this.addWindowListener(windows_listener);
     }
 }

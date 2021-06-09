@@ -57,6 +57,10 @@ public class Mysqld {
     }
 
     public static void onlineAccount(){
+        if (!login_id.equals("root")){
+            JOptionPane.showMessageDialog(null,"UNAUTHORIZED","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Statement sql;
         ResultSet resultSet;
         String url = "select * from user";
@@ -68,7 +72,7 @@ public class Mysqld {
                 String ID = resultSet.getString(1);
                 String email = resultSet.getString(2);
                 String status = resultSet.getString(5);
-                if (status.equals("0")){
+                if (status.equals("1")){
                     String pre = Manage.result_textArea.getText();
                     pre += ID + "\t" + email + "\t\t" + "online" + "\n";
                     Manage.result_textArea.setText(pre);
@@ -91,11 +95,11 @@ public class Mysqld {
                 String ID = resultSet.getString(1);
                 String email = resultSet.getString(2);
                 String status = resultSet.getString(5);
-                if (status.equals("0")) {
+                if (status.equals("1")) {
                     String pre = Manage.result_textArea.getText();
                     pre += ID + "\t" + email + "\t\t" + "online" + "\n";
                     Manage.result_textArea.setText(pre);
-                } else if (status.equals("1")) {
+                } else if (status.equals("0")) {
                     String pre = Manage.result_textArea.getText();
                     pre += ID + "\t" + email + "\t\t" + "offline" + "\n";
                     Manage.result_textArea.setText(pre);
@@ -144,8 +148,8 @@ public class Mysqld {
         String sql = "update user set status=? where id=?";
         try{
             preSql = con.prepareStatement(sql);
-            preSql.setString(1,id);
-            preSql.setString(2,status);
+            preSql.setString(1,status);
+            preSql.setString(2,id);
             preSql.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
